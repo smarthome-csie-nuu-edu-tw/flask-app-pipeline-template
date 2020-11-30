@@ -19,7 +19,7 @@ stages:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-flask
         version: 0.2.0
-        name: ${CICD_GIT_REPO_NAME}-flask
+        name: ${CICD_GIT_REPO_NAME}-flask-${CICD_EXECUTION_SEQUENCE}
         targetNamespace: p-v2nzs-pipeline
         answers:
           git.url: ${CICD_GIT_URL}
@@ -40,7 +40,7 @@ stages:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
         version: 0.2.0
-        name: ${CICD_GIT_REPO_NAME}-web-db
+        name: ${CICD_GIT_REPO_NAME}-web-db-${CICD_EXECUTION_SEQUENCE}
         targetNamespace: p-v2nzs-pipeline
         answers:
           git.url: ${CICD_GIT_URL}
