@@ -7,6 +7,13 @@ stages:
         buildContext: .
         tag: ${CICD_GIT_REPO_NAME}-web:latest
 
+  - name: Publish DB image
+    steps:
+    - publishImageConfig:
+        dockerfilePath: ./sql.Dockerfile
+        buildContext: .
+        tag: ${CICD_GIT_REPO_NAME}-db:latest
+
   - name: Deploy App
     steps:
     - applyAppConfig:
@@ -27,3 +34,23 @@ stages:
           extraEnv[1].value: bear22flask
           extraEnv[2].name: test3
           extraEnv[2].value: send message flask
+    
+  - name: Deploy App with db
+    steps:
+    - applyAppConfig:
+        catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
+        version: 0.2.0
+        name: ${CICD_GIT_REPO_NAME}
+        targetNamespace: p-v2nzs-pipeline
+        answers:
+          git.url: ${CICD_GIT_URL}
+          git.repoName: ${CICD_GIT_REPO_NAME}
+          git.branch: ${CICD_GIT_BRANCH}
+          web.name: flask
+          web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
+          web.tag: latest
+          db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
+          db.tag: latest
+          service.db.enable: true
+          service.db.type: mysql
+          service.db.rootpassword: bearflask
