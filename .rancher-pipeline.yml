@@ -6,6 +6,8 @@ stages:
         dockerfilePath: ./Dockerfile
         buildContext: .
         tag: ${CICD_GIT_REPO_NAME}-web:latest
+      env:
+        PLUGIN_INSECURE: "true"
 
   - name: Publish DB image
     steps:
@@ -13,6 +15,8 @@ stages:
         dockerfilePath: ./sql.Dockerfile
         buildContext: .
         tag: ${CICD_GIT_REPO_NAME}-db:latest
+      env:
+        PLUGIN_INSECURE: "true"
 
   - name: Deploy App
     steps:
