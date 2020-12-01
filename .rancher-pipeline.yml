@@ -6,6 +6,8 @@ stages:
         dockerfilePath: ./Dockerfile
         buildContext: .
         tag: ${CICD_GIT_REPO_NAME}-web:latest
+        pushRemote: true
+        registry: 10.50.1.63:5443
       env:
         PLUGIN_INSECURE: "true"
 
@@ -15,6 +17,8 @@ stages:
         dockerfilePath: ./sql.Dockerfile
         buildContext: .
         tag: ${CICD_GIT_REPO_NAME}-db:latest
+        pushRemote: true
+        registry: 10.50.1.63:5443
       env:
         PLUGIN_INSECURE: "true"
 
