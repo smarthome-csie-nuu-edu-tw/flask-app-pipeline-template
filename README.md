@@ -2,7 +2,7 @@
 
 flask-app-pipeline-template
 
-
+嘗試透過gitlab進行mirror project
 
 
 ## Rancher與Harbor暫時無法運作替代方案
