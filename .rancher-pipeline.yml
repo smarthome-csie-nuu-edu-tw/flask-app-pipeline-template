@@ -25,13 +25,13 @@ stages:
   - name: Deploy simple-no-db
     steps:
     - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-dev-charts3-flask
+        catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
         version: 0.2.0
         name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-simple-no-db
         targetNamespace: p-v2nzs-pipeline
         answers:
           web.name: "flask"
-          web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
+          web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
           #git.url: ${CICD_GIT_URL}
           #git.repoName: ${CICD_GIT_REPO_NAME}
           #git.branch: ${CICD_GIT_BRANCH}
@@ -51,8 +51,8 @@ stages:
         targetNamespace: p-v2nzs-pipeline
         answers:
           web.name: flask
-          web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-          db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
+          web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
+          db.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-db:latest
           service.db.enable: "true"
           service.db.type: mysql
           service.db.rootpassword: bearflaskmysqlmysql
