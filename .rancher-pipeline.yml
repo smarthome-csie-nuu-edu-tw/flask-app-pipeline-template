@@ -22,7 +22,7 @@ stages:
       env:
         PLUGIN_INSECURE: "true"
 
-  - name: Deploy App
+  - name: Deploy simple-no-db
     steps:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-flask
@@ -42,7 +42,7 @@ stages:
           #extraEnv[0].value: bearflask
           #extraEnv[1].name: test2
     
-  - name: Deploy App with mysql
+  - name: Deploy app-with-mysql
     steps:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
@@ -63,7 +63,7 @@ stages:
           #db.tag: latest
           #service.db.gui: "false"         
 
-  - name: Deploy App with postgresql
+  - name: Deploy app-with-postgresql
     steps:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
@@ -85,7 +85,7 @@ stages:
           #service.db.gui: false
           
 
-  - name: Deploy App with db and gui
+  - name: Deploy app-with-mysql-and-gui
     steps:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
@@ -106,7 +106,7 @@ stages:
           #web.tag: latest        
           #db.tag: latest
 
-  - name: Deploy App with db and gui
+  - name: Deploy app-with-mongodb-and-gui
     steps:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
