@@ -27,62 +27,63 @@ stages:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-flask
         version: 0.2.0
-        name: simple-no-db
+        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-simple-no-db
         targetNamespace: p-v2nzs-pipeline
         answers:
-          git.url: ${CICD_GIT_URL}
-          git.repoName: ${CICD_GIT_REPO_NAME}
-          git.branch: ${CICD_GIT_BRANCH}
           web.name: flask
           web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-          web.tag: latest
-          service.db.enable: "false"
-          service.db.gui: "false"
-          extraEnv[0].name: test
-          extraEnv[0].value: bearflask
-          extraEnv[1].name: test2
+          #git.url: ${CICD_GIT_URL}
+          #git.repoName: ${CICD_GIT_REPO_NAME}
+          #git.branch: ${CICD_GIT_BRANCH}
+          #web.tag: latest
+          #service.db.enable: "false"
+          #service.db.gui: "false"
+          #extraEnv[0].name: test
+          #extraEnv[0].value: bearflask
+          #extraEnv[1].name: test2
     
   - name: Deploy App with mysql
     steps:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
         version: 0.1.0
-        name: app-with-mysql
+        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mysql
         targetNamespace: p-v2nzs-pipeline
         answers:
-          git.url: ${CICD_GIT_URL}
-          git.repoName: ${CICD_GIT_REPO_NAME}
-          git.branch: ${CICD_GIT_BRANCH}
           web.name: flask
           web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-          web.tag: latest
           db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
-          db.tag: latest
           service.db.enable: "true"
-          service.db.gui: "false"
           service.db.type: mysql
           service.db.rootpassword: bearflaskmysqlmysql
+          #git.url: ${CICD_GIT_URL}
+          #git.repoName: ${CICD_GIT_REPO_NAME}
+          #git.branch: ${CICD_GIT_BRANCH}
+          #web.tag: latest
+          #db.tag: latest
+          #service.db.gui: "false"         
 
   - name: Deploy App with postgresql
     steps:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
         version: 0.1.0
-        name: app-with-postgresql
+        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-postgresql
         targetNamespace: p-v2nzs-pipeline
         answers:
-          git.url: ${CICD_GIT_URL}
-          git.repoName: ${CICD_GIT_REPO_NAME}
-          git.branch: ${CICD_GIT_BRANCH}
           web.name: flask
           web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-          web.tag: latest
           db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
-          db.tag: latest
           service.db.enable: "true"
-          service.db.gui: false
           service.db.type: postgresql
           service.db.rootpassword: bearflaskpostgresql
+          #git.url: ${CICD_GIT_URL}
+          #git.repoName: ${CICD_GIT_REPO_NAME}
+          #git.branch: ${CICD_GIT_BRANCH}
+          #web.tag: latest
+          #db.tag: latest 
+          #service.db.gui: false
+          
 
   - name: Deploy App with db and gui
     steps:
