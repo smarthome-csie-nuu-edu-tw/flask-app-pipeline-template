@@ -30,7 +30,7 @@ stages:
         name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-simple-no-db
         targetNamespace: p-v2nzs-pipeline
         answers:
-          web.name: flask
+          web.name: "flask"
           web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
           #git.url: ${CICD_GIT_URL}
           #git.repoName: ${CICD_GIT_REPO_NAME}
