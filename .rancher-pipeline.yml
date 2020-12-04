@@ -32,7 +32,7 @@ stages:
         name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test1
         targetNamespace: p-v2nzs-pipeline
         answers:
-          web.type: flask
+          web.type: uwsgi-flask
           web.image: 10.50.1.63:5443/app/${CICD_GIT_REPO_NAME}-web
   
     # 對單一容器部屬進行測試
@@ -44,7 +44,7 @@ stages:
         name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test2
         targetNamespace: p-v2nzs-pipeline
         answers:
-          web.type: flask
+          web.type: uwsgi-flask
           web.image: 10.50.1.63:5443/app/${CICD_GIT_REPO_NAME}-web
 
   - name: Deploy simple-no-db
@@ -55,7 +55,7 @@ stages:
         name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-simple-no-db
         targetNamespace: p-v2nzs-pipeline
         answers:
-          web.name: "flask"
+          web.name: uwsgi-flask
           web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
           #git.url: ${CICD_GIT_URL}
           #git.repoName: ${CICD_GIT_REPO_NAME}
