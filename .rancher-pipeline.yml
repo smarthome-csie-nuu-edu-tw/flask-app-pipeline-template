@@ -67,91 +67,87 @@ stages:
           #extraEnv[0].value: bearflask
           #extraEnv[1].name: test2
     
-  - name: Deploy app-with-mysql
-    steps:
-    - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-        version: 0.1.0
-        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mysql
-        targetNamespace: p-v2nzs-pipeline
-        answers:
-          web.name: flask
-          web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
-          db.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-db:latest
-          service.db.enable: "true"
-          service.db.type: mysql
-          service.db.rootpassword: bearflaskmysqlmysql
-          #git.url: ${CICD_GIT_URL}
-          #git.repoName: ${CICD_GIT_REPO_NAME}
-          #git.branch: ${CICD_GIT_BRANCH}
-          #web.tag: latest
-          #db.tag: latest
-          #service.db.gui: "false"         
+  #- name: Deploy app-with-mysql
+  #  steps:
+  #  - applyAppConfig:
+  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
+  #      version: 0.1.0
+  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mysql
+  #      targetNamespace: p-v2nzs-pipeline
+  #      answers:
+  #        web.name: flask
+  #        web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
+  #        db.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-db:latest
+  #        service.db.enable: "true"
+  #        service.db.type: mysql
+  #        service.db.rootpassword: bearflaskmysqlmysql
+  #        #git.url: ${CICD_GIT_URL}
+  #        #git.repoName: ${CICD_GIT_REPO_NAME}
+  #        #git.branch: ${CICD_GIT_BRANCH}
+  #        #web.tag: latest
+  #        #db.tag: latest
+  #        #service.db.gui: "false"         
 
-  - name: Deploy app-with-postgresql
-    steps:
-    - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-        version: 0.1.0
-        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-postgresql
-        targetNamespace: p-v2nzs-pipeline
-        answers:
-          web.name: flask
-          web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-          db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
-          service.db.enable: "true"
-          service.db.type: postgresql
-          service.db.rootpassword: bearflaskpostgresql
-          #git.url: ${CICD_GIT_URL}
-          #git.repoName: ${CICD_GIT_REPO_NAME}
-          #git.branch: ${CICD_GIT_BRANCH}
-          #web.tag: latest
-          #db.tag: latest 
-          #service.db.gui: false
+  #- name: Deploy app-with-postgresql
+  #  steps:
+  #  - applyAppConfig:
+  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
+  #      version: 0.1.0
+  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-postgresql
+  #      targetNamespace: p-v2nzs-pipeline
+  #      answers:
+  #        web.name: flask
+  #        web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
+  #        db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
+  #        service.db.enable: "true"
+  #        service.db.type: postgresql
+  #        service.db.rootpassword: bearflaskpostgresql
+  #        #git.url: ${CICD_GIT_URL}
+  #        #git.repoName: ${CICD_GIT_REPO_NAME}
+  #        #git.branch: ${CICD_GIT_BRANCH}
+  #        #web.tag: latest
+  #        #db.tag: latest 
+  #        #service.db.gui: false
           
 
-  - name: Deploy app-with-mysql-and-gui
-    steps:
-    - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-        version: 0.1.0
-        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mysql-and-gui
-        targetNamespace: p-v2nzs-pipeline
-        answers:
-          web.name: flask
-          web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-          db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
-          service.db.enable: true
-          service.db.gui: true
-          service.db.type: mysql
-          service.db.rootpassword: bearflaskmysql
-          #git.url: ${CICD_GIT_URL}
-          #git.repoName: ${CICD_GIT_REPO_NAME}
-          #git.branch: ${CICD_GIT_BRANCH}
-          #web.tag: latest        
-          #db.tag: latest
+  #- name: Deploy app-with-mysql-and-gui
+  #  steps:
+  #  - applyAppConfig:
+  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
+  #      version: 0.1.0
+  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mysql-and-gui
+  #      targetNamespace: p-v2nzs-pipeline
+  #      answers:
+  #        web.name: flask
+  #        web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
+  #        db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
+  #        service.db.enable: true
+  #        service.db.gui: true
+  #        service.db.type: mysql
+  #        service.db.rootpassword: bearflaskmysql
+  #        #git.url: ${CICD_GIT_URL}
+  #        #git.repoName: ${CICD_GIT_REPO_NAME}
+  #        #git.branch: ${CICD_GIT_BRANCH}
+  #        #web.tag: latest        
+  #        #db.tag: latest
 
-  - name: Deploy app-with-mongodb-and-gui
-    steps:
-    - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-        version: 0.1.0
-        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mongodb-and-gui
-        targetNamespace: p-v2nzs-pipeline
-        answers:
-          web.name: flask
-          web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-          db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
-          service.db.enable: true
-          service.db.gui: true
-          service.db.type: mongodb
-          service.db.rootpassword: bearflaskmysql
-          #git.url: ${CICD_GIT_URL}
-          #git.repoName: ${CICD_GIT_REPO_NAME}
-          #git.branch: ${CICD_GIT_BRANCH}
-          #web.tag: latest        
-          #db.tag: latest
-          
-          
-
-   
+  #- name: Deploy app-with-mongodb-and-gui
+  #  steps:
+  #  - applyAppConfig:
+  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
+  #      version: 0.1.0
+  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mongodb-and-gui
+  #      targetNamespace: p-v2nzs-pipeline
+  #      answers:
+  #        web.name: flask
+  #        web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
+  #        db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
+  #        service.db.enable: true
+  #        service.db.gui: true
+  #        service.db.type: mongodb
+  #        service.db.rootpassword: bearflaskmysql
+  #        #git.url: ${CICD_GIT_URL}
+  #        #git.repoName: ${CICD_GIT_REPO_NAME}
+  #        #git.branch: ${CICD_GIT_BRANCH}
+  #        #web.tag: latest        
+  #        #db.tag: latest
