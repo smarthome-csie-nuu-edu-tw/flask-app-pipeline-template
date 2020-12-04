@@ -4,6 +4,9 @@ flask-app-pipeline-template
 
 嘗試透過gitlab進行mirror project
 
+## 開發方式
+`前端網頁`: 將程式碼放於`app`資料夾內
+`db`: 將資料庫資料放入到`db`資料夾內
 
 ## Rancher與Harbor暫時無法運作替代方案
 ```
