@@ -11,16 +11,17 @@ stages:
       env:
         PLUGIN_INSECURE: "true"
 
-  - name: Publish DB image
-    steps:
-    - publishImageConfig:
-        dockerfilePath: ./sql.Dockerfile
-        buildContext: .
-        tag: app/${CICD_GIT_REPO_NAME}-db:latest
-        pushRemote: true
-        registry: 10.50.1.63:5443
-      env:
-        PLUGIN_INSECURE: "true"
+  # 在後續版本移除
+  #- name: Publish DB image
+  #  steps:
+  #  - publishImageConfig:
+  #      dockerfilePath: ./sql.Dockerfile
+  #      buildContext: .
+  #      tag: app/${CICD_GIT_REPO_NAME}-db:latest
+  #      pushRemote: true
+  #      registry: 10.50.1.63:5443
+  #    env:
+  #      PLUGIN_INSECURE: "true"
 
   - name: Deploy simple-no-db
     steps:
