@@ -27,7 +27,7 @@ stages:
   - name: Deploy app-web-test1
     steps:
     - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-dev-charts3-web
+        catalogTemplate: cattle-global-data:iii-devops-web
         version: 0.1.0
         name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test1
         targetNamespace: p-v2nzs-pipeline
@@ -40,7 +40,7 @@ stages:
   - name: Deploy app-web-test2
     steps:
     - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-dev-charts3-web
+        catalogTemplate: cattle-global-data:iii-devops-web
         version: 0.1.0
         name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test2
         targetNamespace: p-v2nzs-pipeline
