@@ -47,16 +47,16 @@ stages:
           web.type: uwsgi-flask
           web.image: 10.50.1.63:5443/app/${CICD_GIT_REPO_NAME}-web
 
-  - name: Deploy simple-no-db
-    steps:
-    - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-        version: 0.1.0
-        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-simple-no-db
-        targetNamespace: p-v2nzs-pipeline
-        answers:
-          web.name: uwsgi-flask
-          web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
+  #- name: Deploy simple-no-db
+  #  steps:
+  #  - applyAppConfig:
+  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
+  #      version: 0.1.0
+  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-simple-no-db
+  #      targetNamespace: p-v2nzs-pipeline
+  #      answers:
+  #        web.name: uwsgi-flask
+  #        web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
           #git.url: ${CICD_GIT_URL}
           #git.repoName: ${CICD_GIT_REPO_NAME}
           #git.branch: ${CICD_GIT_BRANCH}
