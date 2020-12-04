@@ -23,11 +23,35 @@ stages:
   #    env:
   #      PLUGIN_INSECURE: "true"
 
+  # 對單一容器部屬進行測試
+  - name: Deploy app-web-test1
+    steps:
+    - applyAppConfig:
+        catalogTemplate: cattle-global-data:iii-dev-charts3-web
+        version: 0.1.0
+        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test1
+        targetNamespace: p-v2nzs-pipeline
+        answers:
+          web.type: uwsgi-nginx-flask
+          web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
+  
+    # 對單一容器部屬進行測試
+  - name: Deploy app-web-test2
+    steps:
+    - applyAppConfig:
+        catalogTemplate: cattle-global-data:iii-dev-charts3-web
+        version: 0.1.0
+        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test2
+        targetNamespace: p-v2nzs-pipeline
+        answers:
+          web.type: flask
+          web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
+
   - name: Deploy simple-no-db
     steps:
     - applyAppConfig:
         catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-        version: 0.2.0
+        version: 0.1.0
         name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-simple-no-db
         targetNamespace: p-v2nzs-pipeline
         answers:
