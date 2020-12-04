@@ -6,10 +6,10 @@ stages:
         dockerfilePath: ./Dockerfile
         buildContext: .
         tag: app/${CICD_GIT_REPO_NAME}-web:latest
-    #    pushRemote: true
-    #    registry: 10.50.1.63:5443
-    #  env:
-    #    PLUGIN_INSECURE: "true"
+        pushRemote: true
+        registry: 10.50.1.63:5443
+      env:
+        PLUGIN_INSECURE: "true"
 
   # 在後續版本移除
   #- name: Publish DB image
@@ -33,7 +33,7 @@ stages:
         targetNamespace: p-v2nzs-pipeline
         answers:
           web.type: flask
-          web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
+          web.image: 10.50.1.63:5443/app/${CICD_GIT_REPO_NAME}-web
   
     # 對單一容器部屬進行測試
   - name: Deploy app-web-test2
@@ -45,7 +45,7 @@ stages:
         targetNamespace: p-v2nzs-pipeline
         answers:
           web.type: flask
-          web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
+          web.image: 10.50.1.63:5443/app/${CICD_GIT_REPO_NAME}-web
 
   - name: Deploy simple-no-db
     steps:
