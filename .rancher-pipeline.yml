@@ -1,155 +1,30 @@
 stages:
-
-  - name: Publish Flask image
-    steps:
-    - publishImageConfig:
-        dockerfilePath: ./Dockerfile
-        buildContext: .
-        tag: app/${CICD_GIT_REPO_NAME}-web:latest
-      #  pushRemote: true
-      #  registry: 10.50.1.63:5443
-      #env:
-      #  PLUGIN_INSECURE: "true"
-
-  # 在後續版本移除
-  #- name: Publish DB image
-  #  steps:
-  #  - publishImageConfig:
-  #      dockerfilePath: ./sql.Dockerfile
-  #      buildContext: .
-  #      tag: app/${CICD_GIT_REPO_NAME}-db:latest
-  #      pushRemote: true
-  #      registry: 10.50.1.63:5443
-  #    env:
-  #      PLUGIN_INSECURE: "true"
-
-  # 對單一容器部屬進行測試
-  - name: Deploy app-web-test1
-    steps:
-    - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-devops-web
-        version: 0.1.0
-        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test1
-        targetNamespace: p-v2nzs-pipeline
-        answers:
-          web.type: uwsgi-flask
-          web.image: 127.0.0.1:34471/${CICD_GIT_REPO_NAME}-web
-          #web.image: 10.50.1.63:5443/app/${CICD_GIT_REPO_NAME}-web
-  
-    # 對單一容器部屬進行測試
-  - name: Deploy app-web-test2
-    steps:
-    - applyAppConfig:
-        catalogTemplate: cattle-global-data:iii-devops-web
-        version: 0.1.0
-        name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test2
-        targetNamespace: p-v2nzs-pipeline
-        answers:
-          web.type: uwsgi-flask
-          web.image: 127.0.0.1:34471/${CICD_GIT_REPO_NAME}-web
-          #web.image: 10.50.1.63:5443/app/${CICD_GIT_REPO_NAME}-web
-
-  #- name: Deploy simple-no-db
-  #  steps:
-  #  - applyAppConfig:
-  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-  #      version: 0.1.0
-  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-simple-no-db
-  #      targetNamespace: p-v2nzs-pipeline
-  #      answers:
-  #        web.name: uwsgi-flask
-  #        web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
-          #git.url: ${CICD_GIT_URL}
-          #git.repoName: ${CICD_GIT_REPO_NAME}
-          #git.branch: ${CICD_GIT_BRANCH}
-          #web.tag: latest
-          #service.db.enable: "false"
-          #service.db.gui: "false"
-          #extraEnv[0].name: test
-          #extraEnv[0].value: bearflask
-          #extraEnv[1].name: test2
-    
-  #- name: Deploy app-with-mysql
-  #  steps:
-  #  - applyAppConfig:
-  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-  #      version: 0.1.0
-  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mysql
-  #      targetNamespace: p-v2nzs-pipeline
-  #      answers:
-  #        web.name: flask
-  #        web.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-web
-  #        db.image: 10.50.1.63:5443/${CICD_GIT_REPO_NAME}-db:latest
-  #        service.db.enable: "true"
-  #        service.db.type: mysql
-  #        service.db.rootpassword: bearflaskmysqlmysql
-  #        #git.url: ${CICD_GIT_URL}
-  #        #git.repoName: ${CICD_GIT_REPO_NAME}
-  #        #git.branch: ${CICD_GIT_BRANCH}
-  #        #web.tag: latest
-  #        #db.tag: latest
-  #        #service.db.gui: "false"         
-
-  #- name: Deploy app-with-postgresql
-  #  steps:
-  #  - applyAppConfig:
-  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-  #      version: 0.1.0
-  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-postgresql
-  #      targetNamespace: p-v2nzs-pipeline
-  #      answers:
-  #        web.name: flask
-  #        web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-  #        db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
-  #        service.db.enable: "true"
-  #        service.db.type: postgresql
-  #        service.db.rootpassword: bearflaskpostgresql
-  #        #git.url: ${CICD_GIT_URL}
-  #        #git.repoName: ${CICD_GIT_REPO_NAME}
-  #        #git.branch: ${CICD_GIT_BRANCH}
-  #        #web.tag: latest
-  #        #db.tag: latest 
-  #        #service.db.gui: false
-          
-
-  #- name: Deploy app-with-mysql-and-gui
-  #  steps:
-  #  - applyAppConfig:
-  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-  #      version: 0.1.0
-  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mysql-and-gui
-  #      targetNamespace: p-v2nzs-pipeline
-  #      answers:
-  #        web.name: flask
-  #        web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-  #        db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
-  #        service.db.enable: true
-  #        service.db.gui: true
-  #        service.db.type: mysql
-  #        service.db.rootpassword: bearflaskmysql
-  #        #git.url: ${CICD_GIT_URL}
-  #        #git.repoName: ${CICD_GIT_REPO_NAME}
-  #        #git.branch: ${CICD_GIT_BRANCH}
-  #        #web.tag: latest        
-  #        #db.tag: latest
-
-  #- name: Deploy app-with-mongodb-and-gui
-  #  steps:
-  #  - applyAppConfig:
-  #      catalogTemplate: cattle-global-data:iii-dev-charts3-web-db
-  #      version: 0.1.0
-  #      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-with-mongodb-and-gui
-  #      targetNamespace: p-v2nzs-pipeline
-  #      answers:
-  #        web.name: flask
-  #        web.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-web
-  #        db.image: 127.0.0.1:34957/${CICD_GIT_REPO_NAME}-db:latest
-  #        service.db.enable: true
-  #        service.db.gui: true
-  #        service.db.type: mongodb
-  #        service.db.rootpassword: bearflaskmysql
-  #        #git.url: ${CICD_GIT_URL}
-  #        #git.repoName: ${CICD_GIT_REPO_NAME}
-  #        #git.branch: ${CICD_GIT_BRANCH}
-  #        #web.tag: latest        
-  #        #db.tag: latest
+- name: Publish Flask image
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: app/${CICD_GIT_REPO_NAME}-web:latest
+      pushRemote: true
+      registry: 127.0.0.1:34840
+- name: Deploy app-web-test1
+  steps:
+  - applyAppConfig:
+      catalogTemplate: cattle-global-data:iii-devops-web
+      version: 0.1.0
+      answers:
+        web.image: 127.0.0.1:34471/${CICD_GIT_REPO_NAME}-web
+        web.type: uwsgi-flask
+      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test1
+      targetNamespace: p-v2nzs-pipeline
+- name: Deploy app-web-test2
+  steps:
+  - applyAppConfig:
+      catalogTemplate: cattle-global-data:iii-devops-web
+      version: 0.1.0
+      answers:
+        web.image: 127.0.0.1:34471/${CICD_GIT_REPO_NAME}-web
+        web.type: uwsgi-flask
+      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-app-web-test2
+      targetNamespace: p-v2nzs-pipeline
+notification: {}
